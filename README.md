@@ -1,4 +1,4 @@
-Creación de ua librecia hecho 100% con CSS
+Creación de una libreria hecho 100% con CSS
 
 Todo lo uqe no se ha logrado:
 
