@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/categories.css' %}?v=1.0">
+{% endblock %}
+
+{% block content %}
+<div class="categories-header">
+    <div class="container">
+        <h1><i class="bi bi-tags"></i> All Categories</h1>
+        <p>Explore our collection by literary genres</p>
+    </div>
+</div>
+
+<div class="categories-container">
+    <div class="container">
+        <div class="categories-grid">
+            {% for category in categories %}
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="bi bi-tag-fill"></i>
+                </div>
+                <div class="category-info">
+                    <h2>{{ category.name }}</h2>
+                    <p class="book-count">{{ category.book_count }} book{{ category.book_count|pluralize }}</p>
+                    {% if category.description %}
+                    <p class="category-description">{{ category.description|truncatechars:100 }}</p>
+                    {% endif %}
+                </div>
+                <a href="{% url 'category_detail' category.slug %}" class="category-link">
+                    View Books <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+            {% empty %}
+            <div class="empty-message">
+                <p>No categories available yet.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

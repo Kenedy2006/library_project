@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/details.css' %}?v=1.0">
+{% endblock %}
+
+{% block content %}
+<div class="detail-container">
+    <div class="detail-header">
+        <h1 class="detail-title">
+            <i class="bi bi-person"></i> {{ author.name }}
+        </h1>
+        
+        <div class="detail-meta">
+            {% if author.birth_date %}
+            <div class="detail-meta-item">
+                <i class="bi bi-balloon"></i>
+                Born: {{ author.birth_date }}
+            </div>
+            {% endif %}
+            
+            {% if author.profile.website %}
+            <div class="detail-meta-item">
+                <i class="bi bi-globe"></i>
+                <a href="{{ author.profile.website }}" target="_blank">Website</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="detail-section">
+        <div class="author-profile">
+            {% if author.profile.photo %}
+            <img src="{{ author.profile.photo.url }}" alt="{{ author.name }}" class="author-photo">
+            {% endif %}
+            
+            <div class="author-info">
+                {% if author.biography %}
+                <h2 class="detail-section-title">
+                    <i class="bi bi-journal-text"></i> Biography
+                </h2>
+                <p>{{ author.biography }}</p>
+                {% endif %}
+                
+                {% if author.profile.twitter_handle %}
+                <div class="author-social">
+                    <a href="https://twitter.com/{{ author.profile.twitter_handle }}" target="_blank">
+                        <i class="bi bi-twitter"></i>
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="detail-section">
+        <h2 class="detail-section-title">
+            <i class="bi bi-book"></i> Books by {{ author.name }}
+        </h2>
+        
+        <div class="related-items">
+            {% for book in author.books.all %}
+            <div class="related-card">
+                {% if book.cover %}
+                <img src="{{ book.cover.url }}" alt="{{ book.title }}">
+                {% else %}
+                <div style="height: 150px; background: #eee; display: flex; align-items: center; justify-content: center;">
+                    <i class="bi bi-book" style="font-size: 3rem; color: #ccc;"></i>
+                </div>
+                {% endif %}
+                <div class="related-card-body">
+                    <h3 class="related-card-title">{{ book.title }}</h3>
+                    <a href="{% url 'book_detail' book.id %}" class="btn-view">
+                        View Book <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            {% empty %}
+            <p>No books available for this author.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <a href="{% url 'author_list' %}" class="back-link">
+        <i class="bi bi-arrow-left"></i> Back to Authors
+    </a>
+</div>
+{% endblock %}

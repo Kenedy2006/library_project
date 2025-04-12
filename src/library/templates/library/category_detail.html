@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/details.css' %}?v=1.0">
+{% endblock %}
+
+{% block content %}
+<div class="detail-container">
+    <div class="detail-header">
+        <h1 class="detail-title">
+            <i class="bi bi-tag"></i> {{ category.name }}
+        </h1>
+        
+        <div class="detail-meta">
+            <div class="detail-meta-item">
+                <i class="bi bi-book"></i>
+                {{ category.books.count }} book{{ category.books.count|pluralize }}
+            </div>
+        </div>
+    </div>
+
+    <div class="detail-section">
+        {% if category.description %}
+        <h2 class="detail-section-title">
+            <i class="bi bi-info-circle"></i> Description
+        </h2>
+        <p>{{ category.description }}</p>
+        {% endif %}
+    </div>
+
+    <div class="detail-section">
+        <h2 class="detail-section-title">
+            <i class="bi bi-book"></i> Books in this Category
+        </h2>
+        
+        <div class="related-items">
+            {% for book in category.books.all %}
+            <div class="related-card">
+                {% if book.cover %}
+                <img src="{{ book.cover.url }}" alt="{{ book.title }}">
+                {% else %}
+                <div style="height: 150px; background: #eee; display: flex; align-items: center; justify-content: center;">
+                    <i class="bi bi-book" style="font-size: 3rem; color: #ccc;"></i>
+                </div>
+                {% endif %}
+                <div class="related-card-body">
+                    <h3 class="related-card-title">{{ book.title }}</h3>
+                    <p>By {{ book.author.name }}</p>
+                    <a href="{% url 'book_detail' book.id %}" class="btn-view">
+                        View Book <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            {% empty %}
+            <p>No books available in this category.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <a href="{% url 'category_list' %}" class="back-link">
+        <i class="bi bi-arrow-left"></i> Back to Categories
+    </a>
+</div>
+{% endblock %}

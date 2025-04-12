@@ -1,0 +1,159 @@
+/* Estilos generales para todos los listados */
+.list-header {
+    background: linear-gradient(135deg, #2c3e50, #3498db);
+    color: white;
+    padding: 3rem 0;
+    margin-bottom: 2rem;
+}
+
+.list-header h1 {
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+.list-container {
+    padding: 2rem 0;
+}
+
+/* Estilos específicos para libros */
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.book-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.book-card-header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 1.5rem;
+}
+
+.book-card-header h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.book-card-header .author {
+    opacity: 0.8;
+    font-style: italic;
+}
+
+.book-card-body {
+    padding: 1.5rem;
+}
+
+.book-meta {
+    margin-bottom: 1rem;
+    color: #555;
+}
+
+.book-meta p {
+    margin-bottom: 0.5rem;
+}
+
+.book-summary {
+    margin-bottom: 1.5rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+.book-actions {
+    text-align: right;
+}
+
+.btn-details {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #3498db;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-details:hover {
+    background-color: #2980b9;
+}
+
+.empty-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .book-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .list-header h1 {
+        font-size: 2rem;
+    }
+}
+
+/* Estilos para autores */
+.author-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.author-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.author-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.author-card-header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 1.5rem;
+}
+
+.author-card-header h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.author-card-header .birth-date {
+    opacity: 0.8;
+    font-style: italic;
+}
+
+.author-card-body {
+    padding: 1.5rem;
+}
+
+.author-bio {
+    margin-bottom: 1.5rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+.author-actions {
+    text-align: right;
+}

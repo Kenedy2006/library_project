@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}?v=1.1">
+{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <div class="container">
+        <h1>Welcome to the Library App</h1>
+        <p class="lead">Explore our collection of books, authors, and categories.</p>
+    </div>
+</div>
+
+<div class="stats-container">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">📕</div>
+                <div class="stat-number">{{ total_books }}</div>
+                <h3>Books</h3>
+                <a href="{% url 'book_list' %}" class="btn">Browse Books</a>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">👨‍🎨</div>
+                <div class="stat-number">{{ total_authors }}</div>
+                <h3>Authors</h3>
+                <a href="{% url 'author_list' %}" class="btn">View Authors</a>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">🏷️</div>
+                <div class="stat-number">{{ total_categories }}</div>
+                <h3>Categories</h3>
+                <a href="{% url 'category_list' %}" class="btn">Explore Categories</a>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">🏢</div>
+                <div class="stat-number">{{ total_publishers }}</div>
+                <h3>Publishers</h3>
+                <a href="#" class="btn">See Publishers</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="recent-section">
+    <div class="container">
+        <div class="section-grid">
+            <div class="section-card">
+                <h2><i class="bi bi-journal-check"></i> Recent Books</h2>
+                <ul class="book-list">
+                    {% for book in recent_books %}
+                    <li>
+                        <a href="{% url 'book_detail' book.id %}" class="book-link">
+                            {{ book.title }}
+                            <span>by {{ book.author.name }}</span>
+                        </a>
+                    </li>
+                    {% empty %}
+                    <li>No books available yet.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+            <div class="section-card">
+                <h2><i class="bi bi-tags"></i> Popular Categories</h2>
+                <ul class="category-list">
+                    {% for category in categories %}
+                    <li>
+                        <a href="{% url 'category_detail' category.slug %}" class="category-link">
+                            {{ category.name }}
+                            <span>{{ category.book_count }} books</span>
+                        </a>
+                    </li>
+                    {% empty %}
+                    <li>No categories available yet.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

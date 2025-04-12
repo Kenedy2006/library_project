@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/list.css' %}?v=1.0">
+{% endblock %}
+
+{% block content %}
+<div class="list-header">
+    <div class="container">
+        <h1>All Authors</h1>
+    </div>
+</div>
+
+<div class="list-container">
+    <div class="container">
+        <div class="author-grid">
+            {% for author in authors %}
+            <div class="author-card">
+                <div class="author-card-header">
+                    <h2>{{ author.name }}</h2>
+                    {% if author.birth_date %}
+                    <p class="birth-date">Born: {{ author.birth_date }}</p>
+                    {% endif %}
+                </div>
+                
+                <div class="author-card-body">
+                    {% if author.biography %}
+                    <div class="author-bio">
+                        <p>{{ author.biography|truncatechars:150 }}</p>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="author-actions">
+                        <a href="{% url 'author_detail' author.id %}" class="btn-details">
+                            View Details <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="empty-message">
+                <p>No authors available yet.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
