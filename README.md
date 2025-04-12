@@ -1,4 +1,4 @@
-Creación de una libreria hecho 100% con CSS
+Creación de una libreria con Django y HTML con capa de personalización hecha con 100% CSS
 
 Todo lo uqe no se ha logrado:
 
